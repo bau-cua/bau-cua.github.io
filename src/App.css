@@ -266,8 +266,18 @@ h2 {
 
 }
 
+.btn-play {
+  margin-top: 1.5rem !important;
+  width: 50%;
+  height: 2.5rem;
+}
 
 @media screen and (max-width: 576px) {
+
+  .btn-play {
+    width: 80%;
+  }
+
   .wrapper {
     overflow-y: auto;
   }
