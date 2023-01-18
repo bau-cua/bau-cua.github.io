@@ -1,18 +1,18 @@
-import BigNumber from 'bignumber.js';
-import React, { useEffect, useState } from 'react';
-import { RandomReveal } from 'react-random-reveal';
+import BigNumber from "bignumber.js";
+import React, { useEffect, useState } from "react";
+import { RandomReveal } from "react-random-reveal";
 import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 
-import './App.css';
-import Delayed from './components/Delayed';
-import Dice from './components/Dice';
-import questionIcon from './images/question.png';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
-import styled from '@emotion/styled';
-import Button from '@mui/material/Button';
+import "./App.css";
+import Delayed from "./components/Delayed";
+import Dice from "./components/Dice";
+import questionIcon from "./images/question.png";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+import styled from "@emotion/styled";
+import Button from "@mui/material/Button";
 interface EpochData {
   epoch: string;
   alpha: string;
@@ -73,6 +73,7 @@ const App = () => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
+
   const handleOpenDialog = () => {
     setOpenDialog(true);
   };
@@ -80,6 +81,7 @@ const App = () => {
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
+
 
   const rollDice = (number: number, id: string) => {
     const dice: any = document.getElementById(id);
@@ -116,7 +118,7 @@ const App = () => {
     }
     const _logs = logs;
     _logs.push({
-      message: 'Truy vấn giá trị ngẫu nhiên từ dịch vụ Orand ...',
+      message: "Truy vấn giá trị ngẫu nhiên từ dịch vụ Orand ...",
     });
     try {
       setFormatedEpochData(undefined);
@@ -162,7 +164,7 @@ const App = () => {
 
   const moveLogToBottom = () => {
     // do nothing
-  };
+  }
 
   const getDiceNameByNumber = (number: number) => {
     switch (number) {
@@ -223,33 +225,27 @@ const App = () => {
       });
       _logs.push({
         message: `Tách biến độc lập:`,
-        timeToShow: 4000,
+        timeToShow: 4000
       });
       const _firstDice = new BigNumber(`0x${lastEight}`).mod(6).plus(1);
       const _secondDice = new BigNumber(`0x${nextLastEight}`).mod(6).plus(1);
       const _thirdDice = new BigNumber(`0x${finalLastEight}`).mod(6).plus(1);
 
       _logs.push({
-        message: `(0x${lastEight} % 6) + 1 = ${_firstDice.toString()} (${getDiceNameByNumber(
-          _firstDice.toNumber()
-        )})`,
-        timeToShow: 6000,
+        message: `(0x${lastEight} % 6) + 1 = ${_firstDice.toString()} (${getDiceNameByNumber(_firstDice.toNumber())})`,
+        timeToShow: 6000
       });
       _logs.push({
-        message: `(0x${nextLastEight} % 6) + 1 = ${_secondDice.toString()} (${getDiceNameByNumber(
-          _secondDice.toNumber()
-        )})`,
-        timeToShow: 6000,
+        message: `(0x${nextLastEight} % 6) + 1 = ${_secondDice.toString()} (${getDiceNameByNumber(_secondDice.toNumber())})`,
+        timeToShow: 6000
       });
       _logs.push({
-        message: `(0x${finalLastEight} % 6) + 1 = ${_thirdDice.toString()} (${getDiceNameByNumber(
-          _thirdDice.toNumber()
-        )})`,
-        timeToShow: 6000,
+        message: `(0x${finalLastEight} % 6) + 1 = ${_thirdDice.toString()} (${getDiceNameByNumber(_thirdDice.toNumber())})`,
+        timeToShow: 6000
       });
       _logs.push({
         message: `Tính toán kết quả:`,
-        timeToShow: 6000,
+        timeToShow: 6000
       });
       setLogs(_logs);
 
@@ -257,7 +253,7 @@ const App = () => {
         rollDice(_firstDice.toNumber(), DICE_IDs[0]);
         rollDice(_secondDice.toNumber(), DICE_IDs[1]);
         rollDice(_thirdDice.toNumber(), DICE_IDs[2]);
-      }, 7000);
+      }, 7000)
 
       setFormatedEpochData({
         'Gamma.X': epochData.gamma.substring(0, 64),
@@ -273,7 +269,7 @@ const App = () => {
     const _logs: Log[] = [];
     if (latestData) {
       _logs.push({
-        message: 'Truy vấn giá trị ngẫu nhiên từ dịch vụ Orand ...',
+        message: "Truy vấn giá trị ngẫu nhiên từ dịch vụ Orand ...",
       });
       _logs.push({
         message: `Nhận được giá trị ngẫu nhiên y = 0x${latestData.y}`,
@@ -342,79 +338,69 @@ const App = () => {
               Lắc Bầu Cua
             </button>
             <div>
-              <img
-                className="tooltip-icon"
-                src={questionIcon}
-                alt={'More Info'}
-                onClick={handleOpenDialog}
-              />
+              <img className="tooltip-icon" src={questionIcon} alt={'More Info'} onClick={handleOpenDialog}/>
               <Dialog
-                fullScreen={fullScreen}
                 open={openDialog}
+                keepMounted
                 onClose={handleCloseDialog}
-                aria-labelledby="responsive-dialog-title"
+                aria-describedby="alert-dialog-slide-description"
               >
                 <ContentDialog>
-                  <ContentText>Bầu cua không "cái"</ContentText>
-                  <ContentText>Sát phạt đầu năm: vui</ContentText>
-                  <ContentText>Anh em tình thân: tăng</ContentText>
-                  <ContentText>Tội vạ nhà cái: gánh</ContentText>
                   <ContentText>
-                    Không có năm nào nhà cái ko mang tiếng lắc không thiêng, lắc
-                    dỏm, thiên vị người này người nọ. Năm nay, nhà cái "dỗi" bỏ
-                    cuộc chơi, để ván bầu cua hoàn toàn dân chủ với giải pháp số
-                    ngẫu nhiên có thể kiểm chứng sử dụng công nghệ blockchain.
-                    Úp chén xuống, ra con gì? Không một ai biết 😉
+                    Bầu cua không "cái"
                   </ContentText>
-                  <ContentText>Thử ngay đi thôi!!</ContentText>
-                  <PlayNowButton
-                    variant="outlined"
-                    className="btn-play"
-                    onClick={handleCloseDialog}
-                  >
-                    Chơi Thôi
-                  </PlayNowButton>
+                  <ContentText>
+                    Sát phạt đầu năm: vui
+                  </ContentText>
+                  <ContentText>
+                    Anh em tình thân: tăng
+                  </ContentText>
+                  <ContentText>
+                    Tội vạ nhà cái: gánh
+                  </ContentText>
+                  <ContentText>
+                    Không có năm nào nhà cái ko mang tiếng lắc không thiêng, lắc dỏm, thiên vị người này người nọ. Năm nay, nhà cái "dỗi" bỏ cuộc chơi, để ván bầu cua hoàn toàn dân chủ với giải pháp số ngẫu nhiên có thể kiểm chứng sử dụng công nghệ blockchain. Úp chén xuống, ra con gì? Không một ai biết 😉
+                  </ContentText>
+                  <ContentText>
+                    Thử ngay đi thôi!!
+                  </ContentText>
+                  <PlayNowButton variant="outlined" className="btn-play" onClick={handleCloseDialog}>Chơi Thôi</PlayNowButton>
                 </ContentDialog>
               </Dialog>
             </div>
           </div>
           <div className="epoch">
             {!isShowingLatestData ? (
-              <h2>{`Dữ liệu của kỷ nguyên ${
-                epochData ? epochData.epoch : 'N/A'
-              }:`}</h2>
+              <h2>{`Dữ liệu của kỷ nguyên ${epochData ? epochData.epoch : 'N/A'}:`}</h2>
             ) : (
-              <h2>{`Dữ liệu của kỷ nguyên ${
-                latestData ? latestData.epoch : 'N/A'
-              }:`}</h2>
+              <h2>{`Dữ liệu của kỷ nguyên ${latestData ? latestData.epoch : 'N/A'}:`}</h2> 
             )}
             <div className="epoch-content">
               {formatedEpochData &&
-                Object.keys(formatedEpochData).map(
-                  (element: string, index: number) => {
-                    return (
-                      <div key={index} className="item">
-                        <div className="title">{element}:</div>
-                        <div className="content">
-                          {!isShowingLatestData ? (
-                            <RandomReveal
-                              isPlaying
-                              duration={3}
-                              revealDuration={1}
-                              characterSet={hexRandomCharacterSet}
-                              characters={formatedEpochData[
-                                element as keyof FormatedEpochData
-                              ].toString()}
-                            />
-                          ) : (
-                            <div>
-                              {formatedEpochData[
-                                element as keyof FormatedEpochData
-                              ].toString()}
-                            </div>
-                          )}
-                        </div>
+                Object.keys(formatedEpochData).map((element: string, index: number) => {
+                  return (
+                    <div key={index} className="item">
+                      <div className="title">{element}:</div>
+                      <div className="content">
+                        {!isShowingLatestData ? (
+                          <RandomReveal
+                            isPlaying
+                            duration={3}
+                            revealDuration={1}
+                            characterSet={hexRandomCharacterSet}
+                            characters={formatedEpochData[
+                              element as keyof FormatedEpochData
+                            ].toString()}
+                          />
+                        ) : (
+                          <div>
+                            {formatedEpochData[
+                              element as keyof FormatedEpochData
+                            ].toString()}
+                          </div>
+                        )}
                       </div>
+                    </div>
                     );
                   }
                 )}
@@ -425,7 +411,7 @@ const App = () => {
           <h2>Thông tin</h2>
           <div className="log-wrapper">
             <div id="log-content" className="log-content">
-              {noDelayLogs.length > 0 &&
+              {noDelayLogs.length > 0 && 
                 noDelayLogs.map((log, index) => {
                   return <div key={index}>{log.message}</div>;
                 })}
